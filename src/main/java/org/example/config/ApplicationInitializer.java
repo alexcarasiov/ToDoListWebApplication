@@ -3,7 +3,6 @@ package org.example.config;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
@@ -25,15 +24,4 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         servlet.setLoadOnStartup(1);
 
     }
-
-
-//    @Override
-//    public void onStartup(ServletContext container) {
-//        XmlWebApplicationContext appContext = new XmlWebApplicationContext();
-//        appContext.setConfigLocation("/WEB-INF/spring/dispatcher-config.xml");
-//
-//        ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(appContext));
-//        dispatcher.setLoadOnStartup(1);
-//        dispatcher.addMapping("/");
-//    }
 }

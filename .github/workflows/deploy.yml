@@ -1,0 +1,14 @@
+name: Deploy ToDo List
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger test
+        run: echo "GitHub Actions trigger works!"

@@ -47,6 +47,7 @@
                     <c:forEach items="${records}" var="record">
                         <div class="record">
                             <div class="record__title"><span class="${record.status == 'DONE' ? 'record__title_strikethrough' : ''}">${record.titel}</span></div>
+                            <div class="record__priority record__priority_${record.priority}">${record.priority}</div>
                             <div class="record__controls">
                                 <c:if test="${record.status == 'ACTIVE'}">
                                     <form action="/make-record-done" method="post" class="record__controls-form">
@@ -89,6 +90,11 @@
         <div class="management-container">
             <form class="management-form" action="/add-record" method="post">
                 <input type="text" name="title" placeholder="What needs to be done..." class="management-form__input">
+                <select name="priority" class="management-form__priority">
+                    <option value="LOW">Low</option>
+                    <option value="MEDIUM" selected>Medium</option>
+                    <option value="HIGH">High</option>
+                </select>
                 <button type="submit" class="management-form__button">Add Record</button>
             </form>
         </div>

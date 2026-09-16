@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.entity.Record;
+import org.example.entity.RecordPriority;
 import org.example.entity.RecordStatus;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,9 @@ import java.util.List;
 public class RecordDao {
     private final List<Record> records = new ArrayList<>(
             Arrays.asList(
-                    new Record("Teka a shower", RecordStatus.ACTIVE),
-                    new Record("Buy flowers", RecordStatus.DONE),
-                    new Record("Go to the gym", RecordStatus.DONE)
+                    new Record("Teka a shower", RecordStatus.ACTIVE, RecordPriority.LOW),
+                    new Record("Buy flowers", RecordStatus.DONE, RecordPriority.MEDIUM),
+                    new Record("Go to the gym", RecordStatus.DONE, RecordPriority.HIGH)
             )
     );
 

@@ -3,6 +3,7 @@ package org.example.services;
 import org.example.controller.DatabaseConnector;
 import org.example.dao.RecordDao;
 import org.example.entity.Record;
+import org.example.entity.RecordPriority;
 import org.example.entity.RecordStatus;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,8 @@ public class RecordService {
         return databaseConnector.executeSQL("Select * from records where status = "+ status.name());
     }
 
-    public void saveRecord(String titel) {
-        recordDao.saveRecord(new Record(titel));
+    public void saveRecord(String titel, RecordPriority priority) {
+        recordDao.saveRecord(new Record(titel, priority));
     }
 
     public void updateRecordStatus(int recordId, RecordStatus status) {

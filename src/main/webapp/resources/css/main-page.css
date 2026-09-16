@@ -149,6 +149,30 @@ button:hover {
     font-weight: 300;
 }
 
+.record__priority {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.record__priority_LOW {
+    background-color: #79C672;
+}
+
+.record__priority_MEDIUM {
+    background-color: #e0a83a;
+}
+
+.record__priority_HIGH {
+    background-color: #e05a3a;
+}
+
 .record__controls {
     display: flex;
     margin-left: 16px;
@@ -184,6 +208,15 @@ button:hover {
     outline: none;
     border: 1px solid #a9bed6;
     box-shadow: 0 0 2px 0 #2d81e2;
+}
+
+.management-form__priority {
+    margin-left: 8px;
+    padding: 10px 14px;
+    border: 1px solid #dedede;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .management-form__button {

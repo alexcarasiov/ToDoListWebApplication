@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.entity.Record;
+import org.example.entity.RecordPriority;
 import org.example.entity.RecordStatus;
 import org.example.services.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,9 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/add-record", method = RequestMethod.POST) // http://localhost:8080/prefix/home
-    public String addRecord(@RequestParam String title) {
+    public String addRecord(@RequestParam String title, @RequestParam(required = false) RecordPriority priority) {
         if (title != null && !title.isBlank()) {
-            recordService.saveRecord(title);
+            recordService.saveRecord(title, priority != null ? priority : RecordPriority.MEDIUM);
         }
         return "redirect:/home";
     }

@@ -5,17 +5,20 @@ public class Record {
     private final int id;
     private final String titel;
     private RecordStatus status;
+    private RecordPriority priority;
 
-    public Record(String titel, RecordStatus status) {
+    public Record(String titel, RecordStatus status, RecordPriority priority) {
         this.id = counterSequence++;
         this.titel = titel;
         this.status = status;
+        this.priority = priority;
     }
 
-    public Record(String titel) {
+    public Record(String titel, RecordPriority priority) {
         this.id = counterSequence++;
         this.titel = titel;
         this.status = RecordStatus.ACTIVE;
+        this.priority = priority;
     }
 
     public int getId() {
@@ -32,6 +35,14 @@ public class Record {
 
     public void setStatus(RecordStatus status) {
         this.status = status;
+    }
+
+    public RecordPriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(RecordPriority priority) {
+        this.priority = priority;
     }
 
 

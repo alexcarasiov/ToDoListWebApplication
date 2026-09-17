@@ -1,22 +1,24 @@
 package org.example.entity;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Record {
-    private static int counterSequence = 0;
+    private static final AtomicInteger counterSequence = new AtomicInteger(0);
     private final int id;
-    private final String titel;
+    private final String title;
     private RecordStatus status;
     private RecordPriority priority;
 
-    public Record(String titel, RecordStatus status, RecordPriority priority) {
-        this.id = counterSequence++;
-        this.titel = titel;
+    public Record(String title, RecordStatus status, RecordPriority priority) {
+        this.id = counterSequence.getAndIncrement();
+        this.title = title;
         this.status = status;
         this.priority = priority;
     }
 
-    public Record(String titel, RecordPriority priority) {
-        this.id = counterSequence++;
-        this.titel = titel;
+    public Record(String title, RecordPriority priority) {
+        this.id = counterSequence.getAndIncrement();
+        this.title = title;
         this.status = RecordStatus.ACTIVE;
         this.priority = priority;
     }
@@ -25,8 +27,8 @@ public class Record {
         return id;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
     public RecordStatus getStatus() {

@@ -49,8 +49,8 @@ public class RecordService {
         return databaseConnector.executeSQL("Select * from records where status = "+ status.name());
     }
 
-    public void saveRecord(String titel, RecordPriority priority) {
-        recordDao.saveRecord(new Record(titel, priority));
+    public void saveRecord(String title, RecordPriority priority) {
+        recordDao.saveRecord(new Record(title, priority));
     }
 
     public void updateRecordStatus(int recordId, RecordStatus status) {

@@ -40,7 +40,7 @@
                 <div class="records-container">
                     <c:forEach items="${records}" var="record">
                         <div class="record">
-                            <div class="record__title"><span class="${record.status == 'DONE' ? 'record__title_strikethrough' : ''}">${record.titel}</span></div>
+                            <div class="record__title"><span class="${record.status == 'DONE' ? 'record__title_strikethrough' : ''}">${record.title}</span></div>
                             <div class="record__priority record__priority_${record.priority}">${record.priority}</div>
                             <div class="record__controls">
                                 <c:if test="${record.status == 'ACTIVE'}">

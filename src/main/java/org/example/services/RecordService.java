@@ -7,7 +7,9 @@ import org.example.entity.RecordPriority;
 import org.example.entity.RecordStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecordService {
@@ -19,8 +21,22 @@ public class RecordService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<Record> findAllRecords() {
-        return recordDao.getRecords();
+    public List<Record> findAllRecords(String filterMode) {
+        List<Record> recordList = recordDao.getRecords();
+        if (filterMode == null || filterMode.isBlank()) {
+            return recordList;
+        }
+
+        List<String> allowedFilterModes = Arrays.stream(RecordStatus.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+        if (allowedFilterModes.contains(filterMode.toUpperCase())) {
+            return recordList.stream()
+                    .filter(record -> record.getStatus().name().equals(filterMode.toUpperCase()))
+                    .collect(Collectors.toList());
+        } else  {
+            return recordList;
+        }
     }
 
     public List<Record> findAllRecordsByStatus(RecordStatus status) {

@@ -30,10 +30,10 @@ public class CommonController {
     }
 
     @RequestMapping("/home") // http://localhost:8080/prefix/home
-    public String getMainPage(Model model) {
-        List<Record> records = recordService.findAllRecords();
-        int numberOfDoneRecords = (int) recordService.findAllRecords().stream().filter(record -> record.getStatus() == RecordStatus.DONE).count();
-        int numberOfActiveRecords = (int) recordService.findAllRecords().stream().filter(record -> record.getStatus() == RecordStatus.ACTIVE).count();
+    public String getMainPage(Model model, @RequestParam(value = "filter", required = false) String filterMode) {
+        List<Record> records = recordService.findAllRecords(filterMode);
+        int numberOfDoneRecords = (int) recordService.findAllRecords(filterMode).stream().filter(record -> record.getStatus() == RecordStatus.DONE).count();
+        int numberOfActiveRecords = (int) recordService.findAllRecords(filterMode).stream().filter(record -> record.getStatus() == RecordStatus.ACTIVE).count();
         model.addAttribute("records", records);
         model.addAttribute("numberOfDoneRecords", numberOfDoneRecords);
         model.addAttribute("numberOfActiveRecords", numberOfActiveRecords);

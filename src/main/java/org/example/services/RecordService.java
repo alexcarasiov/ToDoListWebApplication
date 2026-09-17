@@ -5,6 +5,7 @@ import org.example.dao.RecordDao;
 import org.example.entity.Record;
 import org.example.entity.RecordPriority;
 import org.example.entity.RecordStatus;
+import org.example.entity.dto.RecordsContainerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -21,21 +22,26 @@ public class RecordService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<Record> findAllRecords(String filterMode) {
+    public RecordsContainerDto findAllRecords(String filterMode) {
         List<Record> recordList = recordDao.getRecords();
+        int numberOfDoneRecords = (int) recordList.stream().filter(record -> record.getStatus() == RecordStatus.DONE).count();
+        int numberOfActiveRecords = (int) recordList.stream().filter(record -> record.getStatus() == RecordStatus.ACTIVE).count();
+
         if (filterMode == null || filterMode.isBlank()) {
-            return recordList;
+            return new RecordsContainerDto(recordList, numberOfActiveRecords, numberOfDoneRecords);
         }
 
         List<String> allowedFilterModes = Arrays.stream(RecordStatus.values())
                 .map(Enum::name)
                 .collect(Collectors.toList());
+
         if (allowedFilterModes.contains(filterMode.toUpperCase())) {
-            return recordList.stream()
+            List<Record> filteredList = recordList.stream()
                     .filter(record -> record.getStatus().name().equals(filterMode.toUpperCase()))
                     .collect(Collectors.toList());
+            return new RecordsContainerDto(filteredList, numberOfActiveRecords, numberOfDoneRecords);
         } else  {
-            return recordList;
+            return new RecordsContainerDto(recordList, numberOfActiveRecords, numberOfDoneRecords);
         }
     }
 

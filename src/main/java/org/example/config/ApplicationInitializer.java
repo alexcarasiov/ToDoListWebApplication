@@ -15,11 +15,11 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(WebConfig.class);
-        servletContext.addListener(new ContextLoaderListener(context));
+        AnnotationConfigWebApplicationContext springContext = new AnnotationConfigWebApplicationContext();
+        springContext.register(WebConfig.class);
+        servletContext.addListener(new ContextLoaderListener(springContext));
 
-        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER, new DispatcherServlet(context));
+        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER, new DispatcherServlet(springContext));
         servlet.addMapping("/"); // http://org.example/posts
         servlet.setLoadOnStartup(1);
 
